@@ -1,0 +1,45 @@
+{
+  "name": "virtual-ta-ide",
+  "displayName": "Virtual TA",
+  "description": "Your AI-powered Virtual Technical Assistant embedded natively directly into the IDE",
+  "version": "0.1.0",
+  "publisher": "Google-ADK",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Education"
+  ],
+  "activationEvents": [
+    "onView:virtual-ta-sidebar"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "virtual-ta",
+          "title": "Virtual TA",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "virtual-ta": [
+        {
+          "type": "webview",
+          "id": "virtual-ta-sidebar",
+          "name": "Chat Assistant"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "package": "vsce package"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/vscode": "^1.80.0"
+  }
+}
