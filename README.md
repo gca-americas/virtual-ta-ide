@@ -13,6 +13,28 @@ This extension operates exclusively natively within the IDE `Extension Host` nam
 3. **`src/webview/main.js`**: The visual javascript rendering logic that directly interfaces with the user's interaction stream (Login Box, Dropdown Loading, Async Fetch relays).
 4. **The Backend Fetch Proxy**: When the user hits "Send", `extension.js` packages the IDE Context alongside the message text and blasts an `application/x-www-form-urlencoded` HTTP POST directly to `http://127.0.0.1:8080/api/chat`.
 
+### Payload Example
+When a student asks *"Why is this code failing?"*, the extension intercepts their active editor and constructs the following data layer sent sequentially to the FastAPI backend:
+
+```http
+POST /api/chat HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+name=John Doe
+&workshop=adk-crash-course-b-to-e
+&interface=ide
+&message=[Source: IDE]
+IDE CONTEXT:
+Active File: /path/to/script.py
+Code Contents:
+def hello():
+    print("world"
+Diagnostics: Line 2: SyntaxError: unexpected EOF while parsing
+
+USER QUESTION:
+Why is this code failing?
+```
+
 ## How to Test Locally
 
 Because this runs inside the VS Code namespace, development is incredibly fast:

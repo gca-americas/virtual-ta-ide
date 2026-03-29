@@ -146,6 +146,11 @@ window.addEventListener('message', event => {
         case 'proxyResponse':
             addMessage('TA', message.text, 'system-message');
             break;
+        case 'terminalError':
+            const chatBox = document.getElementById('chat-input');
+            chatBox.value = `"I got this error in my terminal:"\n\n${message.text}`;
+            chatBox.focus();
+            break;
     }
 });
 

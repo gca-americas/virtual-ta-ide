@@ -33,6 +33,20 @@
           "name": "Chat Assistant"
         }
       ]
+    },
+    "commands": [
+      {
+        "command": "virtual-ta.sendErrorToTA",
+        "title": "Send Error to Virtual TA"
+      }
+    ],
+    "menus": {
+      "terminal/context": [
+        {
+          "command": "virtual-ta.sendErrorToTA",
+          "group": "navigation"
+        }
+      ]
     }
   },
   "scripts": {

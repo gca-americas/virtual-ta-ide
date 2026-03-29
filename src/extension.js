@@ -19,7 +19,7 @@ class VirtualTAWebviewProvider {
                     if (editor) {
                         activeCode = editor.document.getText();
                         activeFileName = editor.document.fileName;
-                        
+
                         const diagnostics = vscode.languages.getDiagnostics(editor.document.uri);
                         diagnosticsList = diagnostics.map(d => `Line ${d.range.start.line + 1}: ${d.message}`);
                     }
@@ -43,12 +43,12 @@ ${data.text}`;
                             method: 'POST',
                             body: new URLSearchParams({
                                 name: data.name || 'IDE_Student',
-                                workshop: data.workshop || 'adk-crash-course-b-to-e',
+                                workshop: data.workshop || 'none',
                                 message: combinedMessage,
                                 interface: 'ide'
                             })
                         });
-                        
+
                         const result = await response.json();
                         webviewView.webview.postMessage({
                             type: 'proxyResponse',
@@ -119,6 +119,9 @@ ${data.text}`;
                         <!-- Messages will render dynamically here -->
                     </div>
                     <div class="input-area">
+                        <div style="font-size: 11px; color: var(--vscode-descriptionForeground); text-align: center; margin-bottom: 5px;">
+                            💡 <i>Terminal Error? Highlight it, right-click, and select "Send Error to Virtual TA"</i>
+                        </div>
                         <textarea id="chat-input" placeholder="Ask the Virtual TA..."></textarea>
                         <button id="send-btn">Send</button>
                     </div>
@@ -133,7 +136,23 @@ function activate(context) {
     console.log('Virtual TA Extension Activated');
     const provider = new VirtualTAWebviewProvider(context.extensionUri);
     context.subscriptions.push(vscode.window.registerWebviewViewProvider(VirtualTAWebviewProvider.viewType, provider));
+
+    context.subscriptions.push(vscode.commands.registerCommand('virtual-ta.sendErrorToTA', async () => {
+        // Trigger VS Code to physically copy the terminal highlight into memory
+        await vscode.commands.executeCommand('workbench.action.terminal.copySelection');
+        const errorText = await vscode.env.clipboard.readText();
+
+        if (errorText && provider._view) {
+            // Beam the string down into the Javascript Webview namespace
+            provider._view.webview.postMessage({
+                type: 'terminalError',
+                text: errorText.trim()
+            });
+            // Switch focus automatically to the TA Window!
+            vscode.commands.executeCommand('virtual-ta-sidebar.focus');
+        }
+    }));
 }
 
-function deactivate() {}
+function deactivate() { }
 module.exports = { activate, deactivate };
