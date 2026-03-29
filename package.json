@@ -3,7 +3,7 @@
   "displayName": "Virtual TA",
   "description": "Your AI-powered Virtual Technical Assistant embedded natively directly into the IDE",
   "version": "0.1.0",
-  "publisher": "Google Cloud Adovcacy - Americas",
+  "publisher": "gca-americas",
   "engines": {
     "vscode": "^1.80.0"
   },
