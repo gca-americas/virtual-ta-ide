@@ -3,12 +3,12 @@
   "displayName": "Virtual TA",
   "description": "Your AI-powered Virtual Technical Assistant embedded natively directly into the IDE",
   "version": "0.1.0",
-  "publisher": "Google-ADK",
+  "publisher": "Google Cloud Adovcacy - Americas",
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
-    "Machine Learning",
+    "AI",
     "Education"
   ],
   "activationEvents": [

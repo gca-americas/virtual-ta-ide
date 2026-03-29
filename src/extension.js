@@ -44,7 +44,8 @@ ${data.text}`;
                             body: new URLSearchParams({
                                 name: data.name || 'IDE_Student',
                                 workshop: data.workshop || 'adk-crash-course-b-to-e',
-                                message: combinedMessage
+                                message: combinedMessage,
+                                interface: 'ide'
                             })
                         });
                         
@@ -102,9 +103,7 @@ ${data.text}`;
                     <div class="warning-box">
                         <strong>⚠️ Ephemeral Service Limit</strong><br>
                         This backend AI service is only available for the next <strong>5 hours</strong>.<br><br>
-                        When the workshop concludes, please uninstall this extension visually from your <strong>Extensions Panel (Blocks Icon) -> Virtual TA -> Gear Icon -> Uninstall</strong>.<br><br>
-                        OR by pasting this command directly into your terminal:<br>
-                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 4px; margin-top: 5px; user-select: all; border-radius: 4px;">code --uninstall-extension Google-ADK.virtual-ta-ide</code>
+                        When the workshop concludes, please uninstall this extension visually from your <strong>Extensions Panel (Blocks Icon) -> Virtual TA -> Gear Icon -> Uninstall</strong>.
                     </div>
                 </div>
 
