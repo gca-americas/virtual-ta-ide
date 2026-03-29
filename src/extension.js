@@ -82,12 +82,30 @@ ${data.text}`;
             <body>
                 <div id="login-container" class="login-container">
                     <h2>Welcome to Virtual TA</h2>
-                    <p>Please enter your name and select your course:</p>
+                    <p style="margin-top: 0; font-size: 13px;">Please enter your name and select your course:</p>
+
+                    <div id="service-status" class="status-indicator">
+                        <div class="status-light pending"></div>
+                        <span id="status-text">Checking Service Connection...</span>
+                    </div>
+
                     <input type="text" id="name-input" placeholder="Your Name" />
                     <select id="course-select">
                         <option value="">Loading courses...</option>
                     </select>
                     <button id="login-btn">Start Chatting</button>
+
+                    <div style="margin-top: 15px; text-align: center; font-size: 13px;">
+                        <a href="http://127.0.0.1:8080" style="color: var(--vscode-textLink-foreground); text-decoration: none;">🌐 Open Virtual TA Web Interface</a>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>⚠️ Ephemeral Service Limit</strong><br>
+                        This backend AI service is only available for the next <strong>5 hours</strong>.<br><br>
+                        When the workshop concludes, please uninstall this extension visually from your <strong>Extensions Panel (Blocks Icon) -> Virtual TA -> Gear Icon -> Uninstall</strong>.<br><br>
+                        OR by pasting this command directly into your terminal:<br>
+                        <code style="display: block; background: rgba(0,0,0,0.3); padding: 4px; margin-top: 5px; user-select: all; border-radius: 4px;">code --uninstall-extension Google-ADK.virtual-ta-ide</code>
+                    </div>
                 </div>
 
                 <div id="chat-container" class="chat-container" style="display: none;">

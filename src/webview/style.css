@@ -123,3 +123,47 @@ button {
 button:hover {
     background-color: var(--vscode-button-hoverBackground);
 }
+
+/* Service Status & Expire Warning */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+    font-size: 11px;
+    color: var(--vscode-descriptionForeground);
+}
+.status-light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+.status-light.pending {
+    background-color: #ffffff;
+    animation: flash 1s infinite alternate;
+}
+.status-light.online {
+    background-color: #4CAF50;
+    box-shadow: 0 0 6px #4CAF50;
+}
+.status-light.offline {
+    background-color: #F44336;
+    box-shadow: 0 0 6px #F44336;
+}
+@keyframes flash {
+    from { opacity: 0.3; }
+    to { opacity: 1; }
+}
+.warning-box {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--vscode-inputValidation-warningBackground, rgba(200,100,0,0.2));
+    border: 1px solid var(--vscode-inputValidation-warningBorder, #ff9800);
+    color: var(--vscode-inputValidation-warningForeground, #ff9800);
+    font-size: 11px;
+    border-radius: 4px;
+    text-align: left;
+    line-height: 1.4;
+}

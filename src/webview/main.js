@@ -2,25 +2,35 @@ const vscode = acquireVsCodeApi();
 let userName = '';
 let userWorkshop = '';
 
-// Dynamically fetch actual workshops from the centralized backend
-async function fetchWorkshops() {
+// On Load, fetch workshops
+(async function loadWorkshops() {
+    const select = document.getElementById('course-select');
+    const statusLight = document.querySelector('.status-light');
+    const statusText = document.getElementById('status-text');
+
     try {
-        const response = await fetch('http://127.0.0.1:8080/api/workshops');
-        const workshops = await response.json();
-        const select = document.getElementById('course-select');
-        select.innerHTML = '<option value="">Select a Course...</option>';
+        const res = await fetch('http://127.0.0.1:8080/api/workshops');
+        if (!res.ok) throw new Error('Endpoint offline');
         
-        workshops.forEach(course => {
-            const option = document.createElement('option');
-            option.value = course.id;
-            option.text = course.name;
-            select.appendChild(option);
+        const workshops = await res.json();
+        
+        // Mark Service Online
+        statusLight.className = 'status-light online';
+        statusText.innerText = 'Service Online';
+        
+        select.innerHTML = '<option value="" disabled selected>Select a course...</option>';
+        workshops.forEach(w => {
+            const opt = document.createElement('option');
+            opt.value = w.id;
+            opt.innerText = w.name;
+            select.appendChild(opt);
         });
     } catch (e) {
-        document.getElementById('course-select').innerHTML = '<option value="">(Backend Offline - Defaulting)</option>';
+        statusLight.className = 'status-light offline';
+        statusText.innerText = 'Service Unreachable';
+        select.innerHTML = '<option value="" disabled selected>Service Offline</option>';
     }
-}
-fetchWorkshops();
+})();
 
 document.getElementById('login-btn').addEventListener('click', async () => {
     const nameInput = document.getElementById('name-input');
