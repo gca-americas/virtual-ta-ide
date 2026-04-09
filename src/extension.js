@@ -45,7 +45,8 @@ ${data.text}`;
                                 name: data.name || 'IDE_Student',
                                 workshop: data.workshop || 'none',
                                 message: combinedMessage,
-                                interface: 'ide'
+                                interface: 'ide',
+                                language: data.language || 'English'
                             })
                         });
 
@@ -82,19 +83,27 @@ ${data.text}`;
             </head>
             <body>
                 <div id="login-container" class="login-container">
-                    <h2>Welcome to Virtual TA</h2>
-                    <p style="margin-top: 0; font-size: 13px;">Please enter your name and select your course:</p>
+                    <select id="language-select" style="position: absolute; top: 10px; right: 10px; padding: 4px; font-size: 11px; background: var(--vscode-dropdown-background); color: var(--vscode-dropdown-foreground); border: 1px solid var(--vscode-dropdown-border);">
+                        <option value="English">English</option>
+                        <option value="Spanish">Español</option>
+                        <option value="Portuguese">Português</option>
+                        <option value="Chinese (Simplified)">简体中文</option>
+                        <option value="Chinese (Traditional)">繁體中文</option>
+                        <option value="Japanese">日本語</option>
+                    </select>
+                    <h2 data-i18n="title">Welcome to Virtual TA</h2>
+                    <p style="margin-top: 0; font-size: 13px;" data-i18n="subtitle">Please enter your name and select your course:</p>
 
                     <div id="service-status" class="status-indicator">
                         <div class="status-light pending"></div>
                         <span id="status-text">Checking Service Connection...</span>
                     </div>
 
-                    <input type="text" id="name-input" placeholder="Your Name" />
+                    <input type="text" id="name-input" placeholder="Your Name" data-i18n-placeholder="name_placeholder" />
                     <select id="course-select">
-                        <option value="">Loading courses...</option>
+                        <option value="" data-i18n="select_course">Loading courses...</option>
                     </select>
-                    <button id="login-btn">Start Chatting</button>
+                    <button id="login-btn" data-i18n="start_btn">Start Chatting</button>
 
                     <div style="margin-top: 15px; text-align: center; font-size: 13px;">
                         <a href="http://127.0.0.1:8080" style="color: var(--vscode-textLink-foreground); text-decoration: none;">🌐 Open Virtual TA Web Interface</a>
@@ -109,10 +118,10 @@ ${data.text}`;
 
                 <div id="chat-container" class="chat-container" style="display: none;">
                     <div class="chat-header">
-                        <span id="current-course-display">Chat</span>
+                        <span id="current-course-display" data-i18n="chat_title">Chat</span>
                         <div>
-                            <button id="clear-btn" style="margin-right: 5px;">Clear Chat</button>
-                            <button id="reset-btn">Switch Course</button>
+                            <button id="clear-btn" style="margin-right: 5px;" data-i18n="clear_chat">Clear Chat</button>
+                            <button id="reset-btn" data-i18n="switch_course">Switch Course</button>
                         </div>
                     </div>
                     <div id="messages" class="messages-area">
@@ -120,10 +129,10 @@ ${data.text}`;
                     </div>
                     <div class="input-area">
                         <div style="font-size: 11px; color: var(--vscode-descriptionForeground); text-align: center; margin-bottom: 5px;">
-                            💡 <i>Terminal Error? Highlight it, right-click, and select "Send Error to Virtual TA"</i>
+                            💡 <i data-i18n="hint_3">Terminal Error? Highlight it, right-click, and select "Send Error to Virtual TA"</i>
                         </div>
-                        <textarea id="chat-input" placeholder="Ask the Virtual TA..."></textarea>
-                        <button id="send-btn">Send</button>
+                        <textarea id="chat-input" placeholder="Ask the Virtual TA..." data-i18n-placeholder="chat_ide_placeholder"></textarea>
+                        <button id="send-btn" data-i18n="send_btn">Send</button>
                     </div>
                 </div>
                 <script src="${scriptUri}"></script>
